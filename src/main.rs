@@ -40,6 +40,8 @@ fn main() {
     match foo_vec.get_mut(&key).unwrap() {
         MyEnum::VarOne(data) => {
             let mut data_mut = data.borrow_mut();
+            // cannot borrow data in dereference of `RefMut<'_, &dyn MyTrait>` as mutable
+            // help: trait `DerefMut` is required to modify through a dereference, but it is not implemented for `RefMut<'_, &dyn MyTrait>`
             data_mut.do_something();
         }
         MyEnum::VarTwo(data) => {
